@@ -54,6 +54,40 @@ export default function Home() {
       .filter(Boolean);
   }, [ingredientInput]);
 
+  async function translateTextGoogle(text: string): Promise<string> {
+    try {
+      const res = await fetch("/api/translate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, target: "ja" }),
+      });
+
+      if (!res.ok) {
+        return text;
+      }
+
+      const json = await res.json();
+      return json.translation || text;
+    } catch {
+      return text;
+    }
+  }
+
+  async function translateRecipeWithGoogle(recipe: Recipe): Promise<Recipe> {
+    const [name, instructions] = await Promise.all([
+      translateTextGoogle(recipe.name),
+      translateTextGoogle(recipe.instructions),
+    ]);
+
+    const ingredients = await Promise.all(recipe.ingredients.map((i) => translateTextGoogle(i)));
+
+    return { ...recipe, name, instructions, ingredients };
+  }
+
+  async function translateRecipesWithGoogle(recipes: Recipe[]): Promise<Recipe[]> {
+    return Promise.all(recipes.map(translateRecipeWithGoogle));
+  }
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -77,7 +111,11 @@ export default function Home() {
 
       // Translate full recipe details into Japanese if language is Japanese
       if (language === "ja") {
-        recipes = recipes.map((recipe: Recipe) => translateRecipeToJapanese(recipe)) as Recipe[];
+        if (process.env.NEXT_PUBLIC_USE_GOOGLE_TRANSLATE === "true") {
+          recipes = await translateRecipesWithGoogle(recipes);
+        } else {
+          recipes = recipes.map((recipe: Recipe) => translateRecipeToJapanese(recipe)) as Recipe[];
+        }
       }
 
       setSuggestions(recipes);
