@@ -73,7 +73,7 @@ export default function Home() {
       if (!response.ok) throw new Error("Failed to fetch recipes");
 
       const data = await response.json();
-      let recipes = data.recipes || [];
+      let recipes: Recipe[] = data.recipes || [];
 
       // Translate full recipe details into Japanese if language is Japanese
       if (language === "ja") {
