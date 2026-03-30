@@ -144,7 +144,17 @@ export default function Home() {
           </button>
           <button
             className={`${styles.langButton} ${language === "ja" ? styles.active : ""}`}
-            onClick={() => setLanguage("ja")}
+            onClick={async () => {
+              setLanguage("ja");
+              if (suggestions.length > 0) {
+                if (process.env.NEXT_PUBLIC_USE_GOOGLE_TRANSLATE === "true") {
+                  const translated = await translateRecipesWithGoogle(suggestions);
+                  setSuggestions(translated);
+                } else {
+                  setSuggestions(suggestions.map((recipe) => translateRecipeToJapanese(recipe)));
+                }
+              }
+            }}
           >
             日本語
           </button>
