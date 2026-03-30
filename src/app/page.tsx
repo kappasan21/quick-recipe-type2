@@ -77,7 +77,7 @@ export default function Home() {
 
       // Translate full recipe details into Japanese if language is Japanese
       if (language === "ja") {
-        recipes = recipes.map((recipe) => translateRecipeToJapanese(recipe));
+        recipes = recipes.map((recipe: Recipe) => translateRecipeToJapanese(recipe));
       }
 
       setSuggestions(recipes);
