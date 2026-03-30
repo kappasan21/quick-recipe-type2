@@ -408,8 +408,6 @@ export function translateRecipeInstructionsToJapanese(instructions: string): str
     'soup': 'スープ',
     'salad': 'サラダ',
     'dish': '料理',
-    'plate': '皿',
-    'bowl': 'ボウル',
     'cup': 'カップ',
     'teaspoon': '小さじ',
     'tablespoon': '大さじ',

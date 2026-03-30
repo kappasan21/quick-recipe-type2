@@ -75,7 +75,7 @@ export async function searchRecipes(ingredients: string[]) {
     const inputSet = new Set(ingredients.map((i) => i.toLowerCase()));
     const ranked = recipes
       .map((recipe) => {
-        const matchCount = recipe.ingredients.reduce((count, ing: string) => {
+        const matchCount = recipe.ingredients.reduce((count: number, ing: string) => {
           const recipeIng = ing.toLowerCase();
           const inputIng = Array.from(inputSet).find(input => recipeIng.includes(input));
           if (inputIng) return count + 1;
