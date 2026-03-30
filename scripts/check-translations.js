@@ -1,5 +1,7 @@
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 const filePath = path.join(__dirname, '../src/lib/translations.ts');
 const txt = fs.readFileSync(filePath, 'utf8');
