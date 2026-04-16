@@ -11,7 +11,7 @@ const keys = new Map();
 const values = new Map();
 let match;
 let duplicateKeyCount = 0;
-let duplicateValueCount = 0;
+// let duplicateValueCount = 0;
 
 while ((match = regex.exec(txt))) {
   const key = match[1].trim();
@@ -43,7 +43,7 @@ if (duplicateValueEntries.length > 0) {
   duplicateValueEntries.forEach(([value, keys]) => {
     console.warn(`  ${value} <= ${keys.join(' | ')}`);
   });
-  duplicateValueCount = duplicateValueEntries.length;
+  // duplicateValueCount = duplicateValueEntries.length;
 }
 
 if (duplicateKeyCount > 0) {
