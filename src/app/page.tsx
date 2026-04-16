@@ -143,6 +143,7 @@ export default function Home() {
             English
           </button>
           <button
+            disabled
             className={`${styles.langButton} ${language === "ja" ? styles.active : ""}`}
             onClick={async () => {
               setLanguage("ja");

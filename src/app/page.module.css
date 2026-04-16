@@ -36,22 +36,24 @@
   padding: 8px 12px;
   border: 1px solid #ddd;
   border-radius: 6px;
-  background: white;
-  color: var(--text-primary);
-  cursor: pointer;
+  /* background: white; */
+  background-color: gray;
+  /* color: var(--text-primary); */
+  color: darkgray;
+  /* cursor: pointer; */
   font-weight: 500;
   transition: all 0.2s;
 }
 
-.langButton:hover {
+/* .langButton:hover {
   background: var(--button-secondary-hover);
-}
+} */
 
-.langButton.active {
+/* .langButton.active {
   background: var(--text-primary);
   color: white;
   border-color: var(--text-primary);
-}
+} */
 
 .main {
   display: flex;
