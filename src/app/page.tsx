@@ -152,7 +152,7 @@ export default function Home() {
                   const translated = await translateRecipesWithGoogle(suggestions);
                   setSuggestions(translated);
                 } else {
-                  setSuggestions(suggestions.map((recipe) => translateRecipeToJapanese(recipe)));
+                  // setSuggestions(suggestions.map((recipe) => translateRecipeToJapanese(recipe)));
                 }
               }
             }}
